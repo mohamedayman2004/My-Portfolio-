@@ -140,6 +140,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # ... existing code ...
 import os
 
-# Add these lines at the bottom of the file
+# Media files (Uploaded by user)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# This is essential for handling uploads on Render
+# If not using AWS S3, at least tell Django where to put them, but remember Render free tier deletes files on restart
+# To avoid deletion, we use WhiteNoise for Static, but Media needs explicit handling
+
