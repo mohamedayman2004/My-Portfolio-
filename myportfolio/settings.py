@@ -82,7 +82,14 @@ WSGI_APPLICATION = 'myportfolio.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 database_url = os.getenv('DATABASE_URL')
-if database_url:
+if DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
+elif database_url:
     DATABASES = {
         'default': dj_database_url.config(default=database_url, conn_max_age=500)
     }
